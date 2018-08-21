@@ -22,4 +22,4 @@ FEED_LIMIT = obtain feed limit, 100 by default
 ```
 
 ## From Docker ##
-docker run --rm -p 8080:8080 -e CLIENT_ID=<client id> -e CLIENT_SECRET=<client secret> -e APP_TOKEN=<app token> -e USER_TOKEN=<user token> nealyip/facebook-oauth2
+docker run --rm -p 8080:8080 -e CLIENT_ID=[client id] -e CLIENT_SECRET=[client secret] -e APP_TOKEN=[app token] -e USER_TOKEN=[user token] nealyip/facebook-oauth2
