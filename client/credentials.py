@@ -28,12 +28,12 @@ def login(client_id, state):
         'user_posts'
     )
     scope = ','.join(PERMISSIONS)
-    return '{host}?{query}'.format(host='https://www.facebook.com/v3.1/dialog/oauth', query=parse.urlencode(locals()))
+    return '{host}?{query}'.format(host='https://www.facebook.com/v4.0/dialog/oauth', query=parse.urlencode(locals()))
 
 
 def get_access_token(auth_code=None, refresh_token=None):
     assert auth_code is not None or refresh_token is not None, 'Require either auth or refresh token'
-    url = '{host}?{query}'.format(host='https://graph.facebook.com/v3.1/oauth/access_token', query=parse.urlencode({
+    url = '{host}?{query}'.format(host='https://graph.facebook.com/v4.0/oauth/access_token', query=parse.urlencode({
         'code': auth_code,
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET,

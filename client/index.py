@@ -3,6 +3,7 @@ import random
 import re
 import urllib.parse as parse
 from urllib.error import HTTPError
+import json
 
 import library.local_server as local_server
 from . import CLIENT_PORT, HOST, CLIENT_ID
@@ -44,7 +45,7 @@ class ClientHandler(local_server.Handler):
                 assert search_session and SESSIONS.get(search_session.group(1)), 'Session not found'
                 credential = SESSIONS.get(search_session.group(1)).get('oauth2')
                 user = get_user(credential)
-                body = '<!DOCTYPE html><html><body><h1>Hello {}</h1><div>{}</div></body></html>'.format(user.get('name'), user)
+                body = '<!DOCTYPE html><html><body><h1>Hello {}</h1><div><pre>{}</pre></div></body></html>'.format(user.get('name'), json.dumps(user, ensure_ascii=False, indent=2))
                 self.ok(body)
         except HTTPError as e:
             print(e.fp.read())
