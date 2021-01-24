@@ -5,10 +5,21 @@ import json
 from . import FEED_LIMIT
 
 
-def get_user(credential: Credentials):
-    url = '{host}{user}?{query}'.format(host='https://graph.facebook.com/v3.1/', query=urlencode({
+def get_friends(credential: Credentials):
+    url = '{host}{user}?{query}'.format(host='https://graph.facebook.com/v9.0/me/friends/', query=urlencode({
         'access_token': credential.access_token,
-        'fields': 'email,id,gender,name,friends,birthday,hometown,games,feed,photos,albums'
+    }), user=credential.inspect.get('user_id'))
+
+    req = request.urlopen(url)
+    return json.loads(req.read().decode('utf-8'))
+
+
+def get_user(credential: Credentials):
+    url = '{host}{user}?{query}'.format(host='https://graph.facebook.com/v4.0/', query=urlencode({
+        'access_token': credential.access_token,
+        'fields': 'email,id,gender,name,name_format,first_name,middle_name,last_name,languages,friends,'
+                  'permissions,picture,quotes,likes,birthday,age_range,hometown,meeting_for,link,games,'
+                  'feed,photos,albums,videos'
     }), user=credential.inspect.get('user_id'))
 
     req = request.urlopen(url)

@@ -25,7 +25,10 @@ def login(client_id, state):
         'user_hometown',
         'user_likes',
         'user_photos',
-        'user_posts'
+        'user_posts',
+        'user_age_range',
+        'user_link',
+        'user_videos'
     )
     scope = ','.join(PERMISSIONS)
     return '{host}?{query}'.format(host='https://www.facebook.com/v4.0/dialog/oauth', query=parse.urlencode(locals()))
